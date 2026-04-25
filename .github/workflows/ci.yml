@@ -7,7 +7,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ghcr.io/${{ github.repository_owner }}
 
 jobs:
   build:
@@ -24,80 +23,63 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ── 2. Java ────────────────────────────────────────────────────────────
+      # ── 2. Java + Maven cache ──────────────────────────────────────────────
+      # setup-java's built-in Maven cache handles ~/.m2/repository automatically,
+      # keyed on **/pom.xml — no separate cache step needed.
       - name: Set up Java 21 (Amazon Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'corretto'
+          cache: 'maven'
 
-      # ── 3. Cache ───────────────────────────────────────────────────────────
-      # Caches ~/.m2/repository across runs keyed by pom.xml contents.
-      # target/ is NOT cached — always built clean.
-      - name: Cache Maven repository
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      # ── 4. Build + Test ────────────────────────────────────────────────────
-      # Maven resolves modules in dependency order:
-      #   1. common  (built first, installed to ~/.m2 local repo)
-      #   2. foo     (depends on common — resolved from local repo)
-      #   3. bar     (depends on common — resolved from local repo)
+      # ── 3. Build + Test ────────────────────────────────────────────────────
+      # install (not verify) so all modules land in ~/.m2. The build-image steps
+      # below need common resolvable as a local artifact without a separate step.
+      #
+      # --threads 2 runs the reactor in parallel:
+      #   Thread 1: common → foo → carnival → integration-test
+      #   Thread 2: common → bar → (waits for carnival) → integration-test
       #
       # S3_BUCKET_NAME and AWS credentials are stored as GitHub Actions secrets.
-      # AWS_REGION defaults to us-east-1 in application.yml; override here if needed.
-      - name: Build and test all modules
+      - name: Build, test, and install all modules
         env:
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-        run: |
-          # --threads 2 enables parallel module builds.
-          # Maven respects the reactor dependency graph:
-          #
-          #   Thread 1: common → foo → carnival → integration-test
-          #   Thread 2: common → bar → (idle: waits for carnival) → integration-test
-          #
-          # bar is shorter than foo+carnival so it free-rides alongside them.
-          # integration-test waits for both carnival and bar before starting.
-          # foo and bar ITs run on separate threads with isolated S3Mock containers
-          # on random host ports — no shared state, no collision.
-          mvn --batch-mode --no-transfer-progress --threads 2 verify
+        run: mvn --batch-mode --no-transfer-progress --threads 2 install
 
-      # ── 5. Test Results ────────────────────────────────────────────────────
-      # Surefire writes XML to each module's target/surefire-reports/.
-      # This step collects all of them and renders them in the GitHub UI.
+      # ── 4. Test Results ────────────────────────────────────────────────────
+      # Surefire (unit tests) → surefire-reports/
+      # Failsafe (integration tests) → failsafe-reports/
+      # Collect both so all results appear in the GitHub UI.
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
           files: |
             **/target/surefire-reports/*.xml
+            **/target/failsafe-reports/*.xml
 
-      # ── 6. Upload JARs as artifacts ────────────────────────────────────────
-      # The fat JARs produced by spring-boot:repackage live in each module's
-      # target/. We surface them here so they're downloadable from the UI.
-      # common is excluded — it's a library JAR, not a deployable artifact.
+      # ── 5. Upload JARs as artifacts ────────────────────────────────────────
+      # Upload only the exec (fat) JARs — the thin JARs are library artifacts,
+      # not deployables. common is excluded for the same reason.
       - name: Upload foo JAR
         uses: actions/upload-artifact@v4
         with:
           name: foo-jar
-          path: foo/target/foo-*.jar
+          path: foo/target/foo-*-exec.jar
           if-no-files-found: error
 
       - name: Upload bar JAR
         uses: actions/upload-artifact@v4
         with:
           name: bar-jar
-          path: bar/target/bar-*.jar
+          path: bar/target/bar-*-exec.jar
           if-no-files-found: error
 
-      # ── 7. Docker login ────────────────────────────────────────────────────
+      # ── 6. Docker login ────────────────────────────────────────────────────
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -105,25 +87,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── 8. Build + push Docker images ─────────────────────────────────────
+      # ── 7. Build + push Docker images ─────────────────────────────────────
       # spring-boot:build-image uses Buildpacks (no Dockerfile needed).
-      # The image name comes from each module's pom.xml <image><name>.
-      # We run per-module so failures are isolated and logs are readable.
-      # Install common to ~/.m2 so the build-image steps can resolve it as a
-      # dependency. mvn verify (above) only populates target/ — not the local repo.
-      - name: Install common to local Maven repo
-        run: mvn --batch-mode install -pl common -DskipTests
-
+      # Image names come from <image><name> in each module's pom.xml.
+      # common is already in ~/.m2 from the install step above.
       - name: Build and push foo image
         run: |
-          mvn --batch-mode spring-boot:build-image \
+          mvn --batch-mode --no-transfer-progress spring-boot:build-image \
             --projects foo \
             -DskipTests
           docker push ghcr.io/example/foo:1.0.0-SNAPSHOT
 
       - name: Build and push bar image
         run: |
-          mvn --batch-mode spring-boot:build-image \
+          mvn --batch-mode --no-transfer-progress spring-boot:build-image \
             --projects bar \
             -DskipTests
           docker push ghcr.io/example/bar:1.0.0-SNAPSHOT
