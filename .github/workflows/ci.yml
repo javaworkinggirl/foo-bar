@@ -109,11 +109,15 @@ jobs:
       # spring-boot:build-image uses Buildpacks (no Dockerfile needed).
       # The image name comes from each module's pom.xml <image><name>.
       # We run per-module so failures are isolated and logs are readable.
+      # Install common to ~/.m2 so the build-image steps can resolve it as a
+      # dependency. mvn verify (above) only populates target/ — not the local repo.
+      - name: Install common to local Maven repo
+        run: mvn --batch-mode install -pl common -DskipTests
+
       - name: Build and push foo image
         run: |
           mvn --batch-mode spring-boot:build-image \
             --projects foo \
-            --also-make \
             -DskipTests
           docker push ghcr.io/example/foo:1.0.0-SNAPSHOT
 
@@ -121,6 +125,5 @@ jobs:
         run: |
           mvn --batch-mode spring-boot:build-image \
             --projects bar \
-            --also-make \
             -DskipTests
           docker push ghcr.io/example/bar:1.0.0-SNAPSHOT
