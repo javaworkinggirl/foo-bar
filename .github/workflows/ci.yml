@@ -60,7 +60,7 @@ jobs:
         with:
           files: |
             **/target/surefire-reports/*.xml
-            **/target/failsafe-reports/*.xml
+            **/target/failsafe-reports/TEST-*.xml
 
       # ── 5. Upload JARs as artifacts ────────────────────────────────────────
       # Upload only the exec (fat) JARs — the thin JARs are library artifacts,
