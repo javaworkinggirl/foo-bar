@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-failsafe-plugin/xsd/failsafe-test-report.xsd" version="3.0.2" name="com.example.bar.S3ReaderServiceIT" time="18.174" tests="2" errors="0" skipped="0" failures="0" flakes="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/tara/dev/staff-engineer/bar/target/test-classes:/Users/tara/dev/staff-engineer/bar/target/classes:/Users/tara/dev/staff-engineer/common/target/common-1.0.0-SNAPSHOT.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter/3.5.14/spring-boot-starter-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot/3.5.14/spring-boot-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.5.14/spring-boot-autoconfigure-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.5.14/spring-boot-starter-logging-3.5.14.jar:/Users/tara/.m2/repository/ch/qos/logback/logback-classic/1.5.32/logback-classic-1.5.32.jar:/Users/tara/.m2/repository/ch/qos/logback/logback-core/1.5.32/logback-core-1.5.32.jar:/Users/tara/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/tara/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/tara/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/tara/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/tara/.m2/repository/org/yaml/snakeyaml/2.4/snakeyaml-2.4.jar:/Users/tara/.m2/repository/software/amazon/awssdk/s3/2.29.0/s3-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/aws-xml-protocol/2.29.0/aws-xml-protocol-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/aws-query-protocol/2.29.0/aws-query-protocol-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/protocol-core/2.29.0/protocol-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/arns/2.29.0/arns-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/profiles/2.29.0/profiles-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/crt-core/2.29.0/crt-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth/2.29.0/http-auth-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/identity-spi/2.29.0/identity-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth-spi/2.29.0/http-auth-spi-2.29.0.jar:/Users/tara/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth-aws/2.29.0/http-auth-aws-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/checksums/2.29.0/checksums-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/checksums-spi/2.29.0/checksums-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/retries-spi/2.29.0/retries-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/sdk-core/2.29.0/sdk-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/retries/2.29.0/retries-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/auth/2.29.0/auth-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth-aws-eventstream/2.29.0/http-auth-aws-eventstream-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/eventstream/eventstream/1.0.1/eventstream-1.0.1.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-client-spi/2.29.0/http-client-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/regions/2.29.0/regions-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/annotations/2.29.0/annotations-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/utils/2.29.0/utils-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/aws-core/2.29.0/aws-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/metrics-spi/2.29.0/metrics-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/json-utils/2.29.0/json-utils-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/third-party-jackson-core/2.29.0/third-party-jackson-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/endpoints-spi/2.29.0/endpoints-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/apache-client/2.29.0/apache-client-2.29.0.jar:/Users/tara/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/tara/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/tara/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/Users/tara/.m2/repository/commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/netty-nio-client/2.29.0/netty-nio-client-2.29.0.jar:/Users/tara/.m2/repository/io/netty/netty-codec-http/4.1.132.Final/netty-codec-http-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-codec-http2/4.1.132.Final/netty-codec-http2-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-codec/4.1.132.Final/netty-codec-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-transport/4.1.132.Final/netty-transport-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-common/4.1.132.Final/netty-common-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-buffer/4.1.132.Final/netty-buffer-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-handler/4.1.132.Final/netty-handler-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.132.Final/netty-transport-native-unix-common-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.132.Final/netty-transport-classes-epoll-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-resolver/4.1.132.Final/netty-resolver-4.1.132.Final.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.5.14/spring-boot-starter-web-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.5.14/spring-boot-starter-json-3.5.14.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.21.2/jackson-databind-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.21.2/jackson-core-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.21.2/jackson-datatype-jdk8-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.21.2/jackson-datatype-jsr310-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.21.2/jackson-module-parameter-names-2.21.2.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.5.14/spring-boot-starter-tomcat-3.5.14.jar:/Users/tara/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.54/tomcat-embed-core-10.1.54.jar:/Users/tara/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.54/tomcat-embed-el-10.1.54.jar:/Users/tara/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.54/tomcat-embed-websocket-10.1.54.jar:/Users/tara/.m2/repository/org/springframework/spring-web/6.2.18/spring-web-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-beans/6.2.18/spring-beans-6.2.18.jar:/Users/tara/.m2/repository/io/micrometer/micrometer-observation/1.15.11/micrometer-observation-1.15.11.jar:/Users/tara/.m2/repository/io/micrometer/micrometer-commons/1.15.11/micrometer-commons-1.15.11.jar:/Users/tara/.m2/repository/org/springframework/spring-webmvc/6.2.18/spring-webmvc-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-aop/6.2.18/spring-aop-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-context/6.2.18/spring-context-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-expression/6.2.18/spring-expression-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.5.14/spring-boot-starter-test-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-test/3.5.14/spring-boot-test-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.5.14/spring-boot-test-autoconfigure-3.5.14.jar:/Users/tara/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/tara/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/tara/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.4/jakarta.xml.bind-api-4.0.4.jar:/Users/tara/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.4/jakarta.activation-api-2.1.4.jar:/Users/tara/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/tara/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/tara/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/tara/.m2/repository/org/assertj/assertj-core/3.27.7/assertj-core-3.27.7.jar:/Users/tara/.m2/repository/net/bytebuddy/byte-buddy/1.17.8/byte-buddy-1.17.8.jar:/Users/tara/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/tara/.m2/repository/org/hamcrest/hamcrest/3.0/hamcrest-3.0.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter/5.12.2/junit-jupiter-5.12.2.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.12.2/junit-jupiter-api-5.12.2.jar:/Users/tara/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/tara/.m2/repository/org/junit/platform/junit-platform-commons/1.12.2/junit-platform-commons-1.12.2.jar:/Users/tara/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.12.2/junit-jupiter-params-5.12.2.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.12.2/junit-jupiter-engine-5.12.2.jar:/Users/tara/.m2/repository/org/junit/platform/junit-platform-engine/1.12.2/junit-platform-engine-1.12.2.jar:/Users/tara/.m2/repository/org/mockito/mockito-core/5.17.0/mockito-core-5.17.0.jar:/Users/tara/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar:/Users/tara/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/tara/.m2/repository/org/mockito/mockito-junit-jupiter/5.17.0/mockito-junit-jupiter-5.17.0.jar:/Users/tara/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/tara/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/tara/.m2/repository/org/springframework/spring-core/6.2.18/spring-core-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-jcl/6.2.18/spring-jcl-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-test/6.2.18/spring-test-6.2.18.jar:/Users/tara/.m2/repository/org/xmlunit/xmlunit-core/2.10.4/xmlunit-core-2.10.4.jar:/Users/tara/.m2/repository/org/testcontainers/junit-jupiter/1.21.4/junit-jupiter-1.21.4.jar:/Users/tara/.m2/repository/org/testcontainers/testcontainers/1.21.4/testcontainers-1.21.4.jar:/Users/tara/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/tara/.m2/repository/org/hamcrest/hamcrest-core/3.0/hamcrest-core-3.0.jar:/Users/tara/.m2/repository/org/apache/commons/commons-compress/1.24.0/commons-compress-1.24.0.jar:/Users/tara/.m2/repository/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar:/Users/tara/.m2/repository/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar:/Users/tara/.m2/repository/com/github/docker-java/docker-java-api/3.4.2/docker-java-api-3.4.2.jar:/Users/tara/.m2/repository/com/github/docker-java/docker-java-transport-zerodep/3.4.2/docker-java-transport-zerodep-3.4.2.jar:/Users/tara/.m2/repository/com/github/docker-java/docker-java-transport/3.4.2/docker-java-transport-3.4.2.jar:/Users/tara/.m2/repository/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar:"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="user.timezone" value="America/Denver"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="APPLICATION_NAME" value="bar"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/Users/tara/.sdkman/candidates/java/21.0.10-amzn/lib"/>
+    <property name="sun.java.command" value="/Users/tara/dev/staff-engineer/bar/target/surefire/surefirebooter-20260425161113306_8.jar /Users/tara/dev/staff-engineer/bar/target/surefire 2026-04-25T16-10-49_138-jvmRun1 surefire-20260425161113306_6tmp surefire_1-20260425161113306_7tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/tara/dev/staff-engineer/bar/target/test-classes:/Users/tara/dev/staff-engineer/bar/target/classes:/Users/tara/dev/staff-engineer/common/target/common-1.0.0-SNAPSHOT.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter/3.5.14/spring-boot-starter-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot/3.5.14/spring-boot-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.5.14/spring-boot-autoconfigure-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.5.14/spring-boot-starter-logging-3.5.14.jar:/Users/tara/.m2/repository/ch/qos/logback/logback-classic/1.5.32/logback-classic-1.5.32.jar:/Users/tara/.m2/repository/ch/qos/logback/logback-core/1.5.32/logback-core-1.5.32.jar:/Users/tara/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/tara/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/tara/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/tara/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/tara/.m2/repository/org/yaml/snakeyaml/2.4/snakeyaml-2.4.jar:/Users/tara/.m2/repository/software/amazon/awssdk/s3/2.29.0/s3-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/aws-xml-protocol/2.29.0/aws-xml-protocol-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/aws-query-protocol/2.29.0/aws-query-protocol-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/protocol-core/2.29.0/protocol-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/arns/2.29.0/arns-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/profiles/2.29.0/profiles-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/crt-core/2.29.0/crt-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth/2.29.0/http-auth-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/identity-spi/2.29.0/identity-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth-spi/2.29.0/http-auth-spi-2.29.0.jar:/Users/tara/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth-aws/2.29.0/http-auth-aws-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/checksums/2.29.0/checksums-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/checksums-spi/2.29.0/checksums-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/retries-spi/2.29.0/retries-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/sdk-core/2.29.0/sdk-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/retries/2.29.0/retries-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/auth/2.29.0/auth-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-auth-aws-eventstream/2.29.0/http-auth-aws-eventstream-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/eventstream/eventstream/1.0.1/eventstream-1.0.1.jar:/Users/tara/.m2/repository/software/amazon/awssdk/http-client-spi/2.29.0/http-client-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/regions/2.29.0/regions-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/annotations/2.29.0/annotations-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/utils/2.29.0/utils-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/aws-core/2.29.0/aws-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/metrics-spi/2.29.0/metrics-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/json-utils/2.29.0/json-utils-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/third-party-jackson-core/2.29.0/third-party-jackson-core-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/endpoints-spi/2.29.0/endpoints-spi-2.29.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/apache-client/2.29.0/apache-client-2.29.0.jar:/Users/tara/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/tara/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/tara/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/Users/tara/.m2/repository/commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.jar:/Users/tara/.m2/repository/software/amazon/awssdk/netty-nio-client/2.29.0/netty-nio-client-2.29.0.jar:/Users/tara/.m2/repository/io/netty/netty-codec-http/4.1.132.Final/netty-codec-http-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-codec-http2/4.1.132.Final/netty-codec-http2-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-codec/4.1.132.Final/netty-codec-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-transport/4.1.132.Final/netty-transport-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-common/4.1.132.Final/netty-common-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-buffer/4.1.132.Final/netty-buffer-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-handler/4.1.132.Final/netty-handler-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.132.Final/netty-transport-native-unix-common-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.132.Final/netty-transport-classes-epoll-4.1.132.Final.jar:/Users/tara/.m2/repository/io/netty/netty-resolver/4.1.132.Final/netty-resolver-4.1.132.Final.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.5.14/spring-boot-starter-web-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.5.14/spring-boot-starter-json-3.5.14.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.21.2/jackson-databind-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.21.2/jackson-core-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.21.2/jackson-datatype-jdk8-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.21.2/jackson-datatype-jsr310-2.21.2.jar:/Users/tara/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.21.2/jackson-module-parameter-names-2.21.2.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.5.14/spring-boot-starter-tomcat-3.5.14.jar:/Users/tara/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.54/tomcat-embed-core-10.1.54.jar:/Users/tara/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.54/tomcat-embed-el-10.1.54.jar:/Users/tara/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.54/tomcat-embed-websocket-10.1.54.jar:/Users/tara/.m2/repository/org/springframework/spring-web/6.2.18/spring-web-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-beans/6.2.18/spring-beans-6.2.18.jar:/Users/tara/.m2/repository/io/micrometer/micrometer-observation/1.15.11/micrometer-observation-1.15.11.jar:/Users/tara/.m2/repository/io/micrometer/micrometer-commons/1.15.11/micrometer-commons-1.15.11.jar:/Users/tara/.m2/repository/org/springframework/spring-webmvc/6.2.18/spring-webmvc-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-aop/6.2.18/spring-aop-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-context/6.2.18/spring-context-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-expression/6.2.18/spring-expression-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.5.14/spring-boot-starter-test-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-test/3.5.14/spring-boot-test-3.5.14.jar:/Users/tara/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.5.14/spring-boot-test-autoconfigure-3.5.14.jar:/Users/tara/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/tara/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/tara/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.4/jakarta.xml.bind-api-4.0.4.jar:/Users/tara/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.4/jakarta.activation-api-2.1.4.jar:/Users/tara/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/tara/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/tara/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/tara/.m2/repository/org/assertj/assertj-core/3.27.7/assertj-core-3.27.7.jar:/Users/tara/.m2/repository/net/bytebuddy/byte-buddy/1.17.8/byte-buddy-1.17.8.jar:/Users/tara/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/tara/.m2/repository/org/hamcrest/hamcrest/3.0/hamcrest-3.0.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter/5.12.2/junit-jupiter-5.12.2.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.12.2/junit-jupiter-api-5.12.2.jar:/Users/tara/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/tara/.m2/repository/org/junit/platform/junit-platform-commons/1.12.2/junit-platform-commons-1.12.2.jar:/Users/tara/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.12.2/junit-jupiter-params-5.12.2.jar:/Users/tara/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.12.2/junit-jupiter-engine-5.12.2.jar:/Users/tara/.m2/repository/org/junit/platform/junit-platform-engine/1.12.2/junit-platform-engine-1.12.2.jar:/Users/tara/.m2/repository/org/mockito/mockito-core/5.17.0/mockito-core-5.17.0.jar:/Users/tara/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar:/Users/tara/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/tara/.m2/repository/org/mockito/mockito-junit-jupiter/5.17.0/mockito-junit-jupiter-5.17.0.jar:/Users/tara/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/tara/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/tara/.m2/repository/org/springframework/spring-core/6.2.18/spring-core-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-jcl/6.2.18/spring-jcl-6.2.18.jar:/Users/tara/.m2/repository/org/springframework/spring-test/6.2.18/spring-test-6.2.18.jar:/Users/tara/.m2/repository/org/xmlunit/xmlunit-core/2.10.4/xmlunit-core-2.10.4.jar:/Users/tara/.m2/repository/org/testcontainers/junit-jupiter/1.21.4/junit-jupiter-1.21.4.jar:/Users/tara/.m2/repository/org/testcontainers/testcontainers/1.21.4/testcontainers-1.21.4.jar:/Users/tara/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/tara/.m2/repository/org/hamcrest/hamcrest-core/3.0/hamcrest-core-3.0.jar:/Users/tara/.m2/repository/org/apache/commons/commons-compress/1.24.0/commons-compress-1.24.0.jar:/Users/tara/.m2/repository/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar:/Users/tara/.m2/repository/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar:/Users/tara/.m2/repository/com/github/docker-java/docker-java-api/3.4.2/docker-java-api-3.4.2.jar:/Users/tara/.m2/repository/com/github/docker-java/docker-java-transport-zerodep/3.4.2/docker-java-transport-zerodep-3.4.2.jar:/Users/tara/.m2/repository/com/github/docker-java/docker-java-transport/3.4.2/docker-java-transport-3.4.2.jar:/Users/tara/.m2/repository/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/tara"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="/Users/tara/.sdkman/candidates/java/21.0.10-amzn"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/tara/dev/staff-engineer/bar"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/tara/dev/staff-engineer/bar/target/surefire/surefirebooter-20260425161113306_8.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="21.0.10+7-LTS"/>
+    <property name="user.name" value="tara"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="26.3.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Corretto-21.0.10.7.1"/>
+    <property name="localRepository" value="/Users/tara/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-21/issues/"/>
+    <property name="java.io.tmpdir" value="/var/folders/df/d_cjw9351tj9wk89kfrz9mb40000gn/T/"/>
+    <property name="java.version" value="21.0.10"/>
+    <property name="user.dir" value="/Users/tara/dev/staff-engineer/bar"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="20615"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/tara/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="java.vm.version" value="21.0.10+7-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[bar] "/>
+  </properties>
+  <testcase name="readsExistingObjectFromS3" classname="com.example.bar.S3ReaderServiceIT" time="0.607">
+    <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+16:11:13.581 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.bar.S3ReaderServiceIT]: S3ReaderServiceIT does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:11:13.621 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.bar.BarApplication for test class com.example.bar.S3ReaderServiceIT
+16:11:13.661 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+16:11:13.662 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+16:11:13.673 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 1.21.4
+16:11:13.869 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with Environment variables, system properties and defaults. Resolved dockerHost=unix:///Users/tara/.colima/default/docker.sock
+16:11:13.870 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+16:11:13.883 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.2.1
+  API Version: 1.53
+  Operating System: Ubuntu 24.04.4 LTS
+  Total Memory: 1959 MB
+16:11:13.917 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Creating container for image: testcontainers/ryuk:0.12.0
+16:11:14.099 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 is starting: b88a965218b87d15b836f5733f509dee9680e35012538dde610ca100962883de
+16:11:14.281 [main] INFO tc.testcontainers/ryuk:0.12.0 -- Container testcontainers/ryuk:0.12.0 started in PT0.36417S
+16:11:14.285 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+16:11:14.285 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+16:11:14.285 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+16:11:14.285 [main] INFO tc.adobe/s3mock:latest -- Creating container for image: adobe/s3mock:latest
+16:11:14.300 [main] INFO tc.adobe/s3mock:latest -- Container adobe/s3mock:latest is starting: 2eb98583a79233e6da8ebf8403f330185ed3463f2ddd1fdec37fe28b069a5ea8
+16:11:16.550 [main] INFO tc.adobe/s3mock:latest -- Container adobe/s3mock:latest started in PT2.264657S
+[BAR] line 0
+[BAR] line 1
+[BAR] line 2
+[BAR] line 3
+[BAR] line 4
+[BAR] line 5
+[BAR] line 6
+[BAR] line 7
+[BAR] line 8
+[BAR] line 9
+[BAR] line 10
+[BAR] line 11
+[BAR] line 12
+[BAR] line 13
+[BAR] line 14
+[BAR] line 15
+[BAR] line 16
+[BAR] line 17
+[BAR] line 18
+[BAR] line 19
+[BAR] line 20
+[BAR] line 21
+[BAR] line 22
+[BAR] line 23
+[BAR] line 24
+[BAR] line 25
+[BAR] line 26
+[BAR] line 27
+[BAR] line 28
+[BAR] line 29
+[BAR] line 30
+[BAR] line 31
+[BAR] line 32
+[BAR] line 33
+[BAR] line 34
+[BAR] line 35
+[BAR] line 36
+[BAR] line 37
+[BAR] line 38
+[BAR] line 39
+[BAR] line 40
+[BAR] line 41
+[BAR] line 42
+[BAR] line 43
+[BAR] line 44
+[BAR] line 45
+[BAR] line 46
+[BAR] line 47
+[BAR] line 48
+[BAR] line 49
+[BAR] line 50
+[BAR] line 51
+[BAR] line 52
+[BAR] line 53
+[BAR] line 54
+[BAR] line 55
+[BAR] line 56
+[BAR] line 57
+[BAR] line 58
+[BAR] line 59
+[BAR] line 60
+[BAR] line 61
+[BAR] line 62
+[BAR] line 63
+[BAR] line 64
+[BAR] line 65
+[BAR] line 66
+[BAR] line 67
+[BAR] line 68
+[BAR] line 69
+[BAR] line 70
+[BAR] line 71
+[BAR] line 72
+[BAR] line 73
+[BAR] line 74
+[BAR] line 75
+[BAR] line 76
+[BAR] line 77
+[BAR] line 78
+[BAR] line 79
+[BAR] line 80
+[BAR] line 81
+[BAR] line 82
+[BAR] line 83
+[BAR] line 84
+[BAR] line 85
+[BAR] line 86
+[BAR] line 87
+[BAR] line 88
+[BAR] line 89
+[BAR] line 90
+[BAR] line 91
+[BAR] line 92
+[BAR] line 93
+[BAR] line 94
+[BAR] line 95
+[BAR] line 96
+[BAR] line 97
+[BAR] line 98
+[BAR] line 99
+[BAR] line 100
+[BAR] line 101
+[BAR] line 102
+[BAR] line 103
+[BAR] line 104
+[BAR] line 105
+[BAR] line 106
+[BAR] line 107
+[BAR] line 108
+[BAR] line 109
+[BAR] line 110
+[BAR] line 111
+[BAR] line 112
+[BAR] line 113
+[BAR] line 114
+[BAR] line 115
+[BAR] line 116
+[BAR] line 117
+[BAR] line 118
+[BAR] line 119
+[BAR] line 120
+[BAR] line 121
+[BAR] line 122
+[BAR] line 123
+[BAR] line 124
+[BAR] line 125
+[BAR] line 126
+[BAR] line 127
+[BAR] line 128
+[BAR] line 129
+[BAR] line 130
+[BAR] line 131
+[BAR] line 132
+[BAR] line 133
+[BAR] line 134
+[BAR] line 135
+[BAR] line 136
+[BAR] line 137
+[BAR] line 138
+[BAR] line 139
+[BAR] line 140
+[BAR] line 141
+[BAR] line 142
+[BAR] line 143
+[BAR] line 144
+[BAR] line 145
+[BAR] line 146
+[BAR] line 147
+[BAR] line 148
+[BAR] line 149
+[BAR] line 150
+[BAR] line 151
+[BAR] line 152
+[BAR] line 153
+[BAR] line 154
+[BAR] line 155
+[BAR] line 156
+[BAR] line 157
+[BAR] line 158
+[BAR] line 159
+[BAR] line 160
+[BAR] line 161
+[BAR] line 162
+[BAR] line 163
+[BAR] line 164
+[BAR] line 165
+[BAR] line 166
+[BAR] line 167
+[BAR] line 168
+[BAR] line 169
+[BAR] line 170
+[BAR] line 171
+[BAR] line 172
+[BAR] line 173
+[BAR] line 174
+[BAR] line 175
+[BAR] line 176
+[BAR] line 177
+[BAR] line 178
+[BAR] line 179
+[BAR] line 180
+[BAR] line 181
+[BAR] line 182
+[BAR] line 183
+[BAR] line 184
+[BAR] line 185
+[BAR] line 186
+[BAR] line 187
+[BAR] line 188
+[BAR] line 189
+[BAR] line 190
+[BAR] line 191
+[BAR] line 192
+[BAR] line 193
+[BAR] line 194
+[BAR] line 195
+[BAR] line 196
+[BAR] line 197
+[BAR] line 198
+[BAR] line 199
+[BAR] line 200
+[BAR] line 201
+[BAR] line 202
+[BAR] line 203
+[BAR] line 204
+[BAR] line 205
+[BAR] line 206
+[BAR] line 207
+[BAR] line 208
+[BAR] line 209
+[BAR] line 210
+[BAR] line 211
+[BAR] line 212
+[BAR] line 213
+[BAR] line 214
+[BAR] line 215
+[BAR] line 216
+[BAR] line 217
+[BAR] line 218
+[BAR] line 219
+[BAR] line 220
+[BAR] line 221
+[BAR] line 222
+[BAR] line 223
+[BAR] line 224
+[BAR] line 225
+[BAR] line 226
+[BAR] line 227
+[BAR] line 228
+[BAR] line 229
+[BAR] line 230
+[BAR] line 231
+[BAR] line 232
+[BAR] line 233
+[BAR] line 234
+[BAR] line 235
+[BAR] line 236
+[BAR] line 237
+[BAR] line 238
+[BAR] line 239
+[BAR] line 240
+[BAR] line 241
+[BAR] line 242
+[BAR] line 243
+[BAR] line 244
+[BAR] line 245
+[BAR] line 246
+[BAR] line 247
+[BAR] line 248
+[BAR] line 249
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.14)
+
+2026-04-25T16:11:30.682-06:00  INFO 20615 --- [bar] [           main] com.example.bar.S3ReaderServiceIT        : Starting S3ReaderServiceIT using Java 21.0.10 with PID 20615 (started by tara in /Users/tara/dev/staff-engineer/bar)
+2026-04-25T16:11:30.683-06:00  INFO 20615 --- [bar] [           main] com.example.bar.S3ReaderServiceIT        : No active profile set, falling back to 1 default profile: "default"
+2026-04-25T16:11:30.927-06:00  INFO 20615 --- [bar] [           main] com.example.bar.S3ReaderServiceIT        : Started S3ReaderServiceIT in 0.355 seconds (process running for 17.605)
+]]></system-out>
+    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/Users/tara/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="throwsWhenKeyDoesNotExist" classname="com.example.bar.S3ReaderServiceIT" time="0.065"/>
+</testsuite>

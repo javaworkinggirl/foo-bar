@@ -1,0 +1,4 @@
+com/example/bar/BarApplication.class
+com/example/bar/S3ReaderController.class
+com/example/bar/S3ReaderService.class
+com/example/bar/BarController.class

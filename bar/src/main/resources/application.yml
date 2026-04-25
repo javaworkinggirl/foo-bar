@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: bar
+
+server:
+  port: 8081
+
+app:
+  s3:
+    bucket-name: ${S3_BUCKET_NAME}
+    region: ${AWS_REGION:us-east-1}
