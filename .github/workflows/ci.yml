@@ -17,6 +17,7 @@ jobs:
       contents: read
       packages: write       # needed to push to GHCR
       checks: write         # needed to publish test results
+      pull-requests: read   # needed by publish-unit-test-result-action to link results to PRs
 
     steps:
       # ── 1. Source ──────────────────────────────────────────────────────────
