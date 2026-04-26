@@ -31,6 +31,9 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Docker images used by Testcontainers in integration tests -->
+        <docker.s3mock.version>5.0.0</docker.s3mock.version>
+        <docker.redis.version>7.4.8-alpine</docker.redis.version>
     </properties>
 
     <dependencyManagement>
@@ -108,6 +111,12 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <docker.s3mock.version>${docker.s3mock.version}</docker.s3mock.version>
+                            <docker.redis.version>${docker.redis.version}</docker.redis.version>
+                        </systemPropertyVariables>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

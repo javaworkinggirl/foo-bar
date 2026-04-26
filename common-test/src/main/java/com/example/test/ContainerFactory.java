@@ -13,12 +13,14 @@ public class ContainerFactory {
     }
 
     public static GenericContainer<?> s3Mock() {
-        return new GenericContainer<>(DockerImageName.parse("adobe/s3mock:latest"))
+        String version = System.getProperty("docker.s3mock.version", "5.0.0");
+        return new GenericContainer<>(DockerImageName.parse("adobe/s3mock:" + version))
                 .withExposedPorts(9090);
     }
 
     public static GenericContainer<?> redis() {
-        return new GenericContainer<>(DockerImageName.parse("redis:7-alpine"))
+        String version = System.getProperty("docker.redis.version", "7.4.8-alpine");
+        return new GenericContainer<>(DockerImageName.parse("redis:" + version))
                 .withExposedPorts(6379);
     }
 }
