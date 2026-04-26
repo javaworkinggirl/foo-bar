@@ -1,12 +1,13 @@
 # Documentation
 
-## CI
-
-- [CI Build Logging](ci-build-logging.md) — Why Maven output goes to a file in CI and how to access it after a build
 
 ## Architecture
 
 - [Module Dependencies](module-dependencies.md) — Mermaid diagram of the Maven module dependency graph
+
+## CI
+
+- [CI Build Logging](ci-build-logging.md) — Why Maven output goes to a file in CI and how to access it after a build
 
 ## Testing
 - [Redis Testing Approach](redis-testing-approach.md) — Why real Redis via Testcontainers instead of mocking
