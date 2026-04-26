@@ -42,15 +42,16 @@ jobs:
       #   Thread 2: common → bar → (waits for carnival) → integration-test
       #
       # S3_BUCKET_NAME and AWS credentials are stored as GitHub Actions secrets.
-      - name: Build, test, and install all modules
+      - name: Parallel Maven verify — compile, unit tests, integration tests (2 threads, output logged)
         env:
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
         run: |
+          echo "=== Parallel Maven verify: compile + unit tests + integration tests (2 threads) ==="
           mkdir -p target
-          mvn --batch-mode --no-transfer-progress --threads 2 install -l target/maven-output.log
+          mvn --batch-mode --no-transfer-progress --threads 2 verify -l target/maven-output.log
 
       - name: Upload Maven build log
         uses: actions/upload-artifact@v4
