@@ -11,26 +11,27 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bar</artifactId>
+    <artifactId>common-test</artifactId>
     <packaging>jar</packaging>
+
+    <!--
+        Shared test utilities imported by other modules as a test-scoped dependency.
+        Dependencies here are compile-scoped so consumers get them transitively on
+        their test classpath.
+    -->
 
     <dependencies>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>common</artifactId>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>common-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 
@@ -40,16 +41,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <classifier>exec</classifier>
-                    <image>
-                        <name>ghcr.io/example/bar:${project.version}</name>
-                    </image>
+                    <skip>true</skip>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

@@ -12,6 +12,7 @@
 
     <modules>
         <module>common</module>
+        <module>common-test</module>
         <module>foo</module>
         <module>bar</module>
         <module>carnival</module>
@@ -39,6 +40,12 @@
                 <groupId>com.example</groupId>
                 <artifactId>common</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>common-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
             <!--
                 Thin JAR artifacts from foo and bar — importable by integration-test.

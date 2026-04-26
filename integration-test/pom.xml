@@ -33,13 +33,8 @@
         <!-- foo and common are pulled in transitively through carnival -->
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <groupId>com.example</groupId>
+            <artifactId>common-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

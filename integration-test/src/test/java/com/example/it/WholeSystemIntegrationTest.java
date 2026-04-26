@@ -4,6 +4,9 @@ import com.example.bar.RedisReaderService;
 import com.example.bar.S3ReaderService;
 import com.example.carnival.CarnivalRedisService;
 import com.example.carnival.CarnivalService;
+import com.example.test.ContainerFactory;
+import com.example.test.S3TestClient;
+import com.example.test.TestPropertyRegistrar;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +16,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.S3Configuration;
-
-import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,33 +24,25 @@ import static org.assertj.core.api.Assertions.assertThat;
         classes = IntegrationTestConfig.class,
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Testcontainers
-class CarnivalBarIntegrationIT {
+class WholeSystemIntegrationTest {
 
     static final String BUCKET = "carnival-bar-bucket";
 
     @Container
-    static final GenericContainer<?> S3_MOCK =
-            new GenericContainer<>(DockerImageName.parse("adobe/s3mock:latest"))
-                    .withExposedPorts(9090);
+    static final GenericContainer<?> S3_MOCK = ContainerFactory.s3Mock();
 
     @Container
-    static final GenericContainer<?> REDIS =
-            new GenericContainer<>(DockerImageName.parse("redis:7-alpine"))
-                    .withExposedPorts(6379);
+    static final GenericContainer<?> REDIS = ContainerFactory.redis();
 
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
-        registry.add("app.s3.bucket-name",       () -> BUCKET);
-        registry.add("app.s3.region",            () -> "us-east-1");
-        registry.add("app.s3.endpoint-override",
-                () -> "http://localhost:" + S3_MOCK.getMappedPort(9090));
-        registry.add("spring.data.redis.host", REDIS::getHost);
-        registry.add("spring.data.redis.port", () -> REDIS.getMappedPort(6379));
+        TestPropertyRegistrar.registerS3(registry, S3_MOCK, BUCKET);
+        TestPropertyRegistrar.registerRedis(registry, REDIS);
     }
 
     @BeforeAll
     static void createBucket() {
-        try (S3Client client = s3ClientForPort(S3_MOCK.getMappedPort(9090))) {
+        try (S3Client client = S3TestClient.forPort(S3_MOCK.getMappedPort(9090))) {
             client.createBucket(b -> b.bucket(BUCKET));
         }
     }
@@ -100,17 +88,5 @@ class CarnivalBarIntegrationIT {
 
         assertThat(redisReaderService.read(carnivalRedisService.keyFor("evt-r02")))
                 .isEqualTo("updated");
-    }
-
-    static S3Client s3ClientForPort(int port) {
-        return S3Client.builder()
-                .endpointOverride(URI.create("http://localhost:" + port))
-                .region(Region.US_EAST_1)
-                .credentialsProvider(StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create("test", "test")))
-                .serviceConfiguration(S3Configuration.builder()
-                        .pathStyleAccessEnabled(true)
-                        .build())
-                .build();
     }
 }

@@ -1,9 +1,12 @@
 # Maven Module Dependencies
 
+Solid arrows are compile-scope dependencies. Dashed arrows are test-scope dependencies.
+
 ```mermaid
 graph TD
     subgraph L0["Layer 0"]
         common
+        common-test
     end
     subgraph L1["Layer 1"]
         foo
@@ -21,4 +24,9 @@ graph TD
     foo --> carnival
     carnival --> integration-test
     bar --> integration-test
+
+    common-test -.-> foo
+    common-test -.-> bar
+    common-test -.-> carnival
+    common-test -.-> integration-test
 ```
