@@ -61,17 +61,4 @@ the current design — each class owns its own containers — this does not appl
 However, if the design ever moves to shared containers (Testcontainers Singleton
 Pattern), two classes running in parallel would share the same S3Mock bucket.
 In that case, prefix every S3 key and Redis key with the test class's simple name
-to prevent collisions:
-
-```java
-private String key(String path) {
-    return getClass().getSimpleName() + "/" + path;
-}
-
-@Test void writesToS3() {
-    writerService.write(key("message.txt"), CONTENT);
-}
-```
-
-This makes keys like `S3WriterServiceIT/message.txt` — unique per class even
-inside a shared container.
+to prevent collisions.

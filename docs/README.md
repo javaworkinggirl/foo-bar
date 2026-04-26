@@ -1,5 +1,9 @@
 # Documentation
 
+## CI
+
+- [CI Build Logging](ci-build-logging.md) — Why Maven output goes to a file in CI and how to access it after a build
+
 ## Architecture
 
 - [Module Dependencies](module-dependencies.md) — Mermaid diagram of the Maven module dependency graph
