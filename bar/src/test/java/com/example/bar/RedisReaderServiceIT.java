@@ -24,7 +24,7 @@ class RedisReaderServiceIT {
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
         TestPropertyRegistrar.registerRedis(registry, REDIS);
-        registry.add("app.s3.bucket-name", () -> "test-bucket");
+        registry.add("app.s3.bucket-name", () -> "RedisReaderServiceIT-test-bucket");
         registry.add("app.s3.region",      () -> "us-east-1");
     }
 

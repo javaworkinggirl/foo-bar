@@ -30,10 +30,13 @@ class S3ReaderServiceIT {
 
     @Container
     static final GenericContainer<?> S3_MOCK = ContainerFactory.s3Mock();
+    @Container
+    static final GenericContainer<?> REDIS = ContainerFactory.redis();
 
     @DynamicPropertySource
-    static void s3Properties(DynamicPropertyRegistry registry) {
+    static void properties(DynamicPropertyRegistry registry) {
         TestPropertyRegistrar.registerS3(registry, S3_MOCK, BUCKET);
+        TestPropertyRegistrar.registerRedis(registry, REDIS);
     }
 
     @BeforeAll

@@ -24,16 +24,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 class S3WriterServiceIT {
 
-    static final String BUCKET  = "foo-it-bucket";
-    static final String KEY     = "writer-test/message.txt";
-    static final String CONTENT = "written by foo integration test";
+    static final String BUCKET = "foo-it-bucket";
 
     @Container
     static final GenericContainer<?> S3_MOCK = ContainerFactory.s3Mock();
+    @Container
+    static final GenericContainer<?> REDIS = ContainerFactory.redis();
 
     @DynamicPropertySource
-    static void s3Properties(DynamicPropertyRegistry registry) {
+    static void properties(DynamicPropertyRegistry registry) {
         TestPropertyRegistrar.registerS3(registry, S3_MOCK, BUCKET);
+        TestPropertyRegistrar.registerRedis(registry, REDIS);
     }
 
     @BeforeAll
@@ -47,14 +48,16 @@ class S3WriterServiceIT {
     @Autowired S3WriterService writerService;
     @Autowired S3Client s3Client;
 
+    static final String KEY     = "writer-test/message.txt";
+    static final String CONTENT = "written by foo integration test";
+
     @Test
     void writesToS3AndContentIsVerifiableDirectly() throws IOException {
         writerService.write(KEY, CONTENT);
 
         try (var stream = s3Client.getObject(
                 GetObjectRequest.builder().bucket(BUCKET).key(KEY).build())) {
-            String actual = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-            assertThat(actual).isEqualTo(CONTENT);
+            assertThat(new String(stream.readAllBytes(), StandardCharsets.UTF_8)).isEqualTo(CONTENT);
         }
     }
 
@@ -65,8 +68,7 @@ class S3WriterServiceIT {
 
         try (var stream = s3Client.getObject(
                 GetObjectRequest.builder().bucket(BUCKET).key(KEY).build())) {
-            String actual = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
-            assertThat(actual).isEqualTo("second");
+            assertThat(new String(stream.readAllBytes(), StandardCharsets.UTF_8)).isEqualTo("second");
         }
     }
 }
