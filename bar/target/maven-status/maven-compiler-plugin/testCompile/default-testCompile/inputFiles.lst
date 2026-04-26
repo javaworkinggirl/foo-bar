@@ -1,1 +1,3 @@
-/Users/tara/dev/staff-engineer/bar/src/test/java/com/example/bar/S3ReaderServiceIT.java
+/Users/tara/dev/foo-bar/bar/src/test/java/com/example/bar/RedisReaderServiceIT.java
+/Users/tara/dev/foo-bar/bar/src/test/java/com/example/bar/S3ReaderServiceIT.java
+/Users/tara/dev/foo-bar/bar/src/test/java/com/example/bar/WordFrequencyCounterTest.java

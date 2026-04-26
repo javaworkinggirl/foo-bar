@@ -1,2 +1,5 @@
-/Users/tara/dev/staff-engineer/carnival/src/main/java/com/example/carnival/CarnivalApplication.java
-/Users/tara/dev/staff-engineer/carnival/src/main/java/com/example/carnival/CarnivalService.java
+/Users/tara/dev/foo-bar/carnival/src/main/java/com/example/carnival/CarnivalApplication.java
+/Users/tara/dev/foo-bar/carnival/src/main/java/com/example/carnival/CarnivalEvent.java
+/Users/tara/dev/foo-bar/carnival/src/main/java/com/example/carnival/CarnivalRedisService.java
+/Users/tara/dev/foo-bar/carnival/src/main/java/com/example/carnival/CarnivalService.java
+/Users/tara/dev/foo-bar/carnival/src/main/java/com/example/carnival/EventThrottler.java

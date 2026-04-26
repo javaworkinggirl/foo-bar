@@ -1,4 +1,7 @@
-/Users/tara/dev/staff-engineer/foo/src/main/java/com/example/foo/FooApplication.java
-/Users/tara/dev/staff-engineer/foo/src/main/java/com/example/foo/FooController.java
-/Users/tara/dev/staff-engineer/foo/src/main/java/com/example/foo/S3WriterController.java
-/Users/tara/dev/staff-engineer/foo/src/main/java/com/example/foo/S3WriterService.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/FooApplication.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/FooController.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/KeySanitizer.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/RedisWriterService.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/S3WriterController.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/S3WriterService.java
+/Users/tara/dev/foo-bar/foo/src/main/java/com/example/foo/WriteReceipt.java

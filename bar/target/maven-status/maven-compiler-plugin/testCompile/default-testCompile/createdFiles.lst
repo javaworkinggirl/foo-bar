@@ -1,1 +1,3 @@
+com/example/bar/WordFrequencyCounterTest.class
+com/example/bar/RedisReaderServiceIT.class
 com/example/bar/S3ReaderServiceIT.class

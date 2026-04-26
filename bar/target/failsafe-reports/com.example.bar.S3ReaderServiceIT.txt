@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.bar.S3ReaderServiceIT
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.17 s -- in com.example.bar.S3ReaderServiceIT
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 23.94 s -- in com.example.bar.S3ReaderServiceIT

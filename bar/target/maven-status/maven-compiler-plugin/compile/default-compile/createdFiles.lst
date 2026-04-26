@@ -1,4 +1,7 @@
+com/example/bar/FetchResult.class
 com/example/bar/BarApplication.class
 com/example/bar/S3ReaderController.class
-com/example/bar/S3ReaderService.class
 com/example/bar/BarController.class
+com/example/bar/RedisReaderService.class
+com/example/bar/WordFrequencyCounter.class
+com/example/bar/S3ReaderService.class

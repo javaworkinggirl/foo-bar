@@ -1,1 +1,3 @@
-/Users/tara/dev/staff-engineer/foo/src/test/java/com/example/foo/S3WriterServiceIT.java
+/Users/tara/dev/foo-bar/foo/src/test/java/com/example/foo/KeySanitizerTest.java
+/Users/tara/dev/foo-bar/foo/src/test/java/com/example/foo/RedisWriterServiceIT.java
+/Users/tara/dev/foo-bar/foo/src/test/java/com/example/foo/S3WriterServiceIT.java

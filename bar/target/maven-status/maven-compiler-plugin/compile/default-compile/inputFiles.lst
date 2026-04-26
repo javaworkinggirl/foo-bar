@@ -1,4 +1,7 @@
-/Users/tara/dev/staff-engineer/bar/src/main/java/com/example/bar/BarApplication.java
-/Users/tara/dev/staff-engineer/bar/src/main/java/com/example/bar/BarController.java
-/Users/tara/dev/staff-engineer/bar/src/main/java/com/example/bar/S3ReaderController.java
-/Users/tara/dev/staff-engineer/bar/src/main/java/com/example/bar/S3ReaderService.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/BarApplication.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/BarController.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/FetchResult.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/RedisReaderService.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/S3ReaderController.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/S3ReaderService.java
+/Users/tara/dev/foo-bar/bar/src/main/java/com/example/bar/WordFrequencyCounter.java

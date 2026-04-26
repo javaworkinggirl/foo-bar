@@ -1,9 +1,10 @@
 package com.example.it;
 
+import com.example.bar.RedisReaderService;
 import com.example.bar.S3ReaderService;
+import com.example.carnival.CarnivalRedisService;
 import com.example.carnival.CarnivalService;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,43 +37,69 @@ class CarnivalBarIntegrationIT {
             new GenericContainer<>(DockerImageName.parse("adobe/s3mock:latest"))
                     .withExposedPorts(9090);
 
+    @Container
+    static final GenericContainer<?> REDIS =
+            new GenericContainer<>(DockerImageName.parse("redis:7-alpine"))
+                    .withExposedPorts(6379);
+
     @DynamicPropertySource
-    static void s3Properties(DynamicPropertyRegistry registry) {
+    static void properties(DynamicPropertyRegistry registry) {
         registry.add("app.s3.bucket-name",       () -> BUCKET);
         registry.add("app.s3.region",            () -> "us-east-1");
         registry.add("app.s3.endpoint-override",
                 () -> "http://localhost:" + S3_MOCK.getMappedPort(9090));
+        registry.add("spring.data.redis.host", REDIS::getHost);
+        registry.add("spring.data.redis.port", () -> REDIS.getMappedPort(6379));
     }
 
     @BeforeAll
-    static void createBucket() throws InterruptedException{
+    static void createBucket() {
         try (S3Client client = s3ClientForPort(S3_MOCK.getMappedPort(9090))) {
             client.createBucket(b -> b.bucket(BUCKET));
-        }
-        for (int i = 0; i < 250; i++) {
-            System.out.println("[CARNIVAL-IT] line " + i);
-            Thread.sleep(50);
         }
     }
 
     @Autowired CarnivalService carnivalService;
-    @Autowired S3ReaderService readerService;
+    @Autowired S3ReaderService s3ReaderService;
+    @Autowired CarnivalRedisService carnivalRedisService;
+    @Autowired RedisReaderService redisReaderService;
+
+    // ── S3 tests ──────────────────────────────────────────────────────────────
 
     @Test
-    void carnivalPublishesEventAndBarReadsIt() {
+    void carnivalPublishesEventAndBarReadsItFromS3() {
         carnivalService.publishEvent("evt-001", "ride the ferris wheel");
 
-        String actual = readerService.read(carnivalService.keyFor("evt-001"));
-        assertThat(actual).isEqualTo("ride the ferris wheel");
+        assertThat(s3ReaderService.read(carnivalService.keyFor("evt-001")))
+                .isEqualTo("ride the ferris wheel");
     }
 
     @Test
-    void carnivalOverwriteIsReflectedInBarRead() {
+    void carnivalOverwriteIsReflectedInBarS3Read() {
         carnivalService.publishEvent("evt-002", "first");
         carnivalService.publishEvent("evt-002", "revised");
 
-        String actual = readerService.read(carnivalService.keyFor("evt-002"));
-        assertThat(actual).isEqualTo("revised");
+        assertThat(s3ReaderService.read(carnivalService.keyFor("evt-002")))
+                .isEqualTo("revised");
+    }
+
+    // ── Redis tests ───────────────────────────────────────────────────────────
+
+    @Test
+    void carnivalPublishesEventAndBarReadsItFromRedis() {
+        carnivalRedisService.publishEvent("evt-r01", "spin the teacups");
+
+        assertThat(redisReaderService.read(carnivalRedisService.keyFor("evt-r01")))
+                .isEqualTo("spin the teacups");
+    }
+
+    @Test
+    void carnivalRedisOverwriteIsReflectedInBarRead() {
+        carnivalRedisService.publishEvent("evt-r02", "first");
+        carnivalRedisService.publishEvent("evt-r02", "updated");
+
+        assertThat(redisReaderService.read(carnivalRedisService.keyFor("evt-r02")))
+                .isEqualTo("updated");
     }
 
     static S3Client s3ClientForPort(int port) {

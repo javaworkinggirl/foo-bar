@@ -1,4 +1,7 @@
 com/example/foo/S3WriterService.class
 com/example/foo/S3WriterController.class
 com/example/foo/FooApplication.class
+com/example/foo/RedisWriterService.class
+com/example/foo/KeySanitizer.class
+com/example/foo/WriteReceipt.class
 com/example/foo/FooController.class
