@@ -54,24 +54,5 @@ static final String KEY = "writer-test/message.txt";
 
 ## What You Do Need to Watch For
 
-If a future test class shares an external resource with another class (e.g. a
-singleton container or a fixed port), that resource would need protection. With
-the current design — each class owns its own containers — this does not apply.
-
-However, if the design ever moves to shared containers (Testcontainers Singleton
-Pattern), two classes running in parallel would share the same S3Mock bucket.
-In that case, prefix every S3 key and Redis key with the test class's simple name
-to prevent collisions:
-
-```java
-private String key(String path) {
-    return getClass().getSimpleName() + "/" + path;
-}
-
-@Test void writesToS3() {
-    writerService.write(key("message.txt"), CONTENT);
-}
-```
-
-This makes keys like `S3WriterServiceIT/message.txt` and
-`RedisWriterServiceIT/message.txt` — unique per class even inside a shared container.
+Every test class that needs S3 or Redis or anything else that uses a key, preface the KEY 
+with the class name so we can run test classes in parallel.
