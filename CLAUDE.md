@@ -38,7 +38,7 @@ mvn spring-boot:build-image -pl foo --also-make -DskipTests
 
 ## Architecture
 
-This is a multi-module Maven project (Java 21, Spring Boot 3.5.14, AWS SDK v2).
+This is a multi-module Maven project (Java 25 with preview features enabled, Spring Boot 3.5.14, AWS SDK v2).
 
 **Module dependency graph:**
 ```
