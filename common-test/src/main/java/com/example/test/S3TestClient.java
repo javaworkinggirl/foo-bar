@@ -8,9 +8,12 @@ import software.amazon.awssdk.services.s3.S3Configuration;
 
 import java.net.URI;
 
-public class S3TestClient {
+public final class S3TestClient {
 
-    public static S3Client forPort(int port) {
+    private S3TestClient() {
+    }
+
+    public static S3Client forPort(final int port) {
         return S3Client.builder()
                 .endpointOverride(URI.create("http://localhost:" + port))
                 .region(Region.US_EAST_1)

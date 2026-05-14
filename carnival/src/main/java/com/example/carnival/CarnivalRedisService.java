@@ -6,19 +6,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarnivalRedisService {
 
-    static final String KEY_PREFIX = "carnival:events:";
+    /* default */ static final String KEY_PREFIX = "carnival:events:";
 
-    private final RedisWriterService redisWriterService;
+    private final RedisWriterService redisWriter;
 
-    public CarnivalRedisService(RedisWriterService redisWriterService) {
-        this.redisWriterService = redisWriterService;
+    public CarnivalRedisService(final RedisWriterService redisWriter) {
+        this.redisWriter = redisWriter;
     }
 
-    public void publishEvent(String eventId, String payload) {
-        redisWriterService.write(KEY_PREFIX + eventId, payload);
+    public void publishEvent(final String eventId, final String payload) {
+        redisWriter.write(KEY_PREFIX + eventId, payload);
     }
 
-    public String keyFor(String eventId) {
+    public String keyFor(final String eventId) {
         return KEY_PREFIX + eventId;
     }
 }

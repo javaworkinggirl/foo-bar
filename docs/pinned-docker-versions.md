@@ -9,8 +9,11 @@ tests as system properties via Failsafe:
 <properties>
     <docker.s3mock.version>5.0.0</docker.s3mock.version>
     <docker.redis.version>7.4.8-alpine</docker.redis.version>
+    <docker.redpanda.version>v24.1.2</docker.redpanda.version>
 </properties>
 ```
+
+Kafka tests use **Redpanda** rather than `confluentinc/cp-kafka`. Redpanda is fully Kafka API-compatible, starts significantly faster, and avoids a macOS + Docker Desktop compatibility issue where `cp-kafka` fails to execute its startup script (`Text file busy`, exit code 126).
 
 To change a version, update the property in `pom.xml`. Nothing else needs to change.
 

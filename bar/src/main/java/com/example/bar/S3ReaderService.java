@@ -17,13 +17,13 @@ public class S3ReaderService {
     private final S3Client s3Client;
     private final S3Properties props;
 
-    public S3ReaderService(S3Client s3Client, S3Properties props) {
+    public S3ReaderService(final S3Client s3Client, final S3Properties props) {
         this.s3Client = s3Client;
         this.props = props;
     }
 
-    public String read(String key) {
-        GetObjectRequest request = GetObjectRequest.builder()
+    public String read(final String key) {
+        final GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(props.bucketName())
                 .key(key)
                 .build();

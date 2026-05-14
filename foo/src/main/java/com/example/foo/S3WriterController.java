@@ -12,14 +12,14 @@ public class S3WriterController {
 
     private final S3WriterService writerService;
 
-    public S3WriterController(S3WriterService writerService) {
+    public S3WriterController(final S3WriterService writerService) {
         this.writerService = writerService;
     }
 
     @PostMapping("/write")
     public ResponseEntity<String> write(
-            @RequestParam String key,
-            @RequestParam String content) {
+            @RequestParam final String key,
+            @RequestParam final String content) {
         writerService.write(key, content);
         return ResponseEntity.ok("Written to S3: " + key);
     }

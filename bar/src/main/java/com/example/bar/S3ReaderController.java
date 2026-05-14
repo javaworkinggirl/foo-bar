@@ -12,13 +12,13 @@ public class S3ReaderController {
 
     private final S3ReaderService readerService;
 
-    public S3ReaderController(S3ReaderService readerService) {
+    public S3ReaderController(final S3ReaderService readerService) {
         this.readerService = readerService;
     }
 
     @GetMapping("/read")
-    public ResponseEntity<String> read(@RequestParam String key) {
-        String content = readerService.read(key);
+    public ResponseEntity<String> read(@RequestParam final String key) {
+        final String content = readerService.read(key);
         return ResponseEntity.ok(content);
     }
 }

@@ -9,7 +9,7 @@ public class FooController {
 
     private final GreetingService greetingService;
 
-    public FooController(GreetingService greetingService) {
+    public FooController(final GreetingService greetingService) {
         this.greetingService = greetingService;
     }
 

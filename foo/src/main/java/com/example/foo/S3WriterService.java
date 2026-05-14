@@ -12,13 +12,13 @@ public class S3WriterService {
     private final S3Client s3Client;
     private final S3Properties props;
 
-    public S3WriterService(S3Client s3Client, S3Properties props) {
+    public S3WriterService(final S3Client s3Client, final S3Properties props) {
         this.s3Client = s3Client;
         this.props = props;
     }
 
-    public void write(String key, String content) {
-        PutObjectRequest request = PutObjectRequest.builder()
+    public void write(final String key, final String content) {
+        final PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(props.bucketName())
                 .key(key)
                 .contentType("text/plain")

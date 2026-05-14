@@ -9,7 +9,7 @@ public class BarController {
 
     private final GreetingService greetingService;
 
-    public BarController(GreetingService greetingService) {
+    public BarController(final GreetingService greetingService) {
         this.greetingService = greetingService;
     }
 

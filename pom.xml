@@ -35,6 +35,8 @@
         <docker.s3mock.version>5.0.0</docker.s3mock.version>
         <docker.redis.version>7.4.8-alpine</docker.redis.version>
         <docker.redpanda.version>v24.1.2</docker.redpanda.version>
+        <!-- false locally; CI passes -Dpmd.failOnViolation=true -->
+        <pmd.failOnViolation>false</pmd.failOnViolation>
     </properties>
 
     <dependencyManagement>
@@ -86,6 +88,33 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.28.0</version>
+                <configuration>
+                    <targetJdk>25-preview</targetJdk>
+                    <rulesets>
+                        <ruleset>category/java/bestpractices.xml</ruleset>
+                        <ruleset>category/java/codestyle.xml</ruleset>
+                        <ruleset>category/java/design.xml</ruleset>
+                        <ruleset>category/java/errorprone.xml</ruleset>
+                        <ruleset>category/java/multithreading.xml</ruleset>
+                        <ruleset>category/java/performance.xml</ruleset>
+                    </rulesets>
+                    <failOnViolation>${pmd.failOnViolation}</failOnViolation>
+                    <printFailingErrors>true</printFailingErrors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>

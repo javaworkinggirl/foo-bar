@@ -3,8 +3,8 @@ package com.example.carnival;
 import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Sliding-window rate limiter per event type. Allows at most {@code maxPerWindow}
@@ -14,24 +14,24 @@ public class EventThrottler {
 
     private final int maxPerWindow;
     private final long windowMillis;
-    private final Map<String, Deque<Instant>> windows = new HashMap<>();
+    private final Map<String, Deque<Instant>> windows = new ConcurrentHashMap<>();
 
-    public EventThrottler(int maxPerWindow, long windowMillis) {
+    public EventThrottler(final int maxPerWindow, final long windowMillis) {
         this.maxPerWindow = maxPerWindow;
         this.windowMillis = windowMillis;
     }
 
-    public boolean tryAcquire(String eventType) {
-        Instant now = Instant.now();
-        Deque<Instant> timestamps = windows.computeIfAbsent(eventType, k -> new ArrayDeque<>());
-        Instant cutoff = now.minusMillis(windowMillis);
+    public boolean tryAcquire(final String eventType) {
+        final Instant now = Instant.now();
+        final Deque<Instant> timestamps = windows.computeIfAbsent(eventType, k -> new ArrayDeque<>());
+        final Instant cutoff = now.minusMillis(windowMillis);
         while (!timestamps.isEmpty() && timestamps.peekFirst().isBefore(cutoff)) {
             timestamps.pollFirst();
         }
-        if (timestamps.size() < maxPerWindow) {
+        final boolean acquired = timestamps.size() < maxPerWindow;
+        if (acquired) {
             timestamps.addLast(now);
-            return true;
         }
-        return false;
+        return acquired;
     }
 }

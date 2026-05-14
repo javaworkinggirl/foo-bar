@@ -2,6 +2,8 @@
 
 Solid arrows are compile-scope dependencies. Dashed arrows are test-scope dependencies.
 
+**Runtime infrastructure:** S3Mock (foo, bar, carnival, integration-test), Redis (foo, bar, carnival, integration-test), Kafka (bar publishes, carnival subscribes, integration-test).
+
 ```mermaid
 graph TD
     subgraph L0["Layer 0"]

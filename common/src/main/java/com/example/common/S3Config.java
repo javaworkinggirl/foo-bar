@@ -7,17 +7,19 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.S3ClientBuilder;
 import software.amazon.awssdk.services.s3.S3Configuration;
 
 import java.net.URI;
 
+@SuppressWarnings("PMD.AtLeastOneConstructor")
 @Configuration
 @EnableConfigurationProperties(S3Properties.class)
 public class S3Config {
 
     @Bean
-    public S3Client s3Client(S3Properties props) {
-        var builder = S3Client.builder()
+    public S3Client s3Client(final S3Properties props) {
+        final S3ClientBuilder builder = S3Client.builder()
                 .region(Region.of(props.region()));
 
         if (props.endpointOverride() != null) {

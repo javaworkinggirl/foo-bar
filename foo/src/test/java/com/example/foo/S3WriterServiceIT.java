@@ -42,7 +42,6 @@ class S3WriterServiceIT {
         try (S3Client client = S3TestClient.forPort(S3_MOCK.getMappedPort(9090))) {
             client.createBucket(b -> b.bucket(BUCKET));
         }
-        ContainerFactory.simulateSlowSetup("FOO");
     }
 
     @Autowired S3WriterService writerService;

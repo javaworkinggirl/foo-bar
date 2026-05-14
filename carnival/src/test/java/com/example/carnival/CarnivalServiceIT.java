@@ -20,7 +20,8 @@ import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE,
+        properties = "spring.kafka.listener.auto-startup=false")
 @Testcontainers
 class CarnivalServiceIT {
 
@@ -39,7 +40,6 @@ class CarnivalServiceIT {
         try (S3Client client = S3TestClient.forPort(S3_MOCK.getMappedPort(9090))) {
             client.createBucket(b -> b.bucket(BUCKET));
         }
-        ContainerFactory.simulateSlowSetup("CARNIVAL");
     }
 
     @Autowired CarnivalService carnivalService;

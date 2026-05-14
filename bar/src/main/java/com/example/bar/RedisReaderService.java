@@ -8,11 +8,11 @@ public class RedisReaderService {
 
     private final StringRedisTemplate redis;
 
-    public RedisReaderService(StringRedisTemplate redis) {
+    public RedisReaderService(final StringRedisTemplate redis) {
         this.redis = redis;
     }
 
-    public String read(String key) {
+    public String read(final String key) {
         return redis.opsForValue().get(key);
     }
 }

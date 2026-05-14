@@ -8,11 +8,11 @@ public class RedisWriterService {
 
     private final StringRedisTemplate redis;
 
-    public RedisWriterService(StringRedisTemplate redis) {
+    public RedisWriterService(final StringRedisTemplate redis) {
         this.redis = redis;
     }
 
-    public void write(String key, String value) {
+    public void write(final String key, final String value) {
         redis.opsForValue().set(key, value);
     }
 }

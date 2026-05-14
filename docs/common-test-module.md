@@ -17,7 +17,6 @@ with hardcoded fallbacks for running tests directly from an IDE:
 ```java
 ContainerFactory.s3Mock()  // adobe/s3mock — version from docker.s3mock.version
 ContainerFactory.redis()   // redis alpine  — version from docker.redis.version
-ContainerFactory.simulateSlowSetup("FOO")  // artificial delay used in @BeforeAll to demonstrate parallel builds
 ```
 
 ### `TestPropertyRegistrar`
